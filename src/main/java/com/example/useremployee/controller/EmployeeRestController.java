@@ -3,6 +3,9 @@ import com.example.useremployee.DTO.EmployeeConverter;
 import com.example.useremployee.DTO.EmployeeDTO;
 import com.example.useremployee.DTO.UserConverter;
 import com.example.useremployee.DTO.UserDTO;
+import com.example.useremployee.DTO2.EmployCon;
+import com.example.useremployee.DTO2.UsDTO;
+import com.example.useremployee.DTO2.UserCon;
 import com.example.useremployee.repository.EmployeeRepository;
 import com.example.useremployee.repository.UserRepository;
 import com.example.useremployee.useremployee.model.Employee;
@@ -27,6 +30,12 @@ public class EmployeeRestController {
    @Autowired
    EmployeeConverter employeeConverter;
 
+
+   @Autowired
+   EmployCon employCon;
+
+    @Autowired
+    UserCon userCon;
 
     @Autowired
     UserConverter userConverter;
@@ -100,6 +109,41 @@ public class EmployeeRestController {
         }
 
     }
+
+
+    //_____________________________________________________
+    @GetMapping("/userss")
+    public List<UsDTO> getAllUserss() {
+        List<UsDTO> userDTOList = new ArrayList<>();
+        List<User> userList = userRepository.findAll();
+        userList.forEach(u ->{
+            userDTOList.add(userCon.usDTO(u));
+        });
+        return userDTOList;
+    }
+
+    @PostMapping("/userr")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UsDTO postUserr (@RequestBody UsDTO usDTO) {
+        User user =  userCon.toEntity(usDTO);
+        user.setUserID(0);
+        userRepository.save(user);
+        System.out.println(user);
+        return userCon.usDTO(user);
+    }
+
+
+    @PostMapping("/employeee")
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDTO postEmployeee (@RequestBody EmployeeDTO employeeDTO) {
+        Employee employee = employCon.toEntity(employeeDTO);
+        employee.setId(0);
+        employeeRepository.save(employee);
+        System.out.println(employee);
+        return employeeConverter.toDTO(employee);
+    }
+
+
 
 
 }

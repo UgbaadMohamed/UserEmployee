@@ -30,6 +30,10 @@ public class Employee {
         this.name=name;
         this.user=user;
     }
+    public Employee(String name,User user) {
+        this.name = name;
+        this.user=user;
+    }
 
     public Employee() {
 

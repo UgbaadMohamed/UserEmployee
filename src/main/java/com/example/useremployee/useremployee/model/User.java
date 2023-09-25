@@ -1,5 +1,6 @@
 package com.example.useremployee.useremployee.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +12,7 @@ public class User {
 
     @Column(unique = true)
     private String email;
-    //@JsonIgnore
+  //  @JsonIgnore
     private String password;
 
     //dette gør at du kan slette uden at få problemer med childerow..

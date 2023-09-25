@@ -5,17 +5,13 @@ import org.springframework.stereotype.Component;
 public class EmployeeConverter {
 
     public Employee toEntity(EmployeeDTO employeeDTO) {
-        return new Employee() {
-            {
-                employeeDTO.gender();
-                employeeDTO.born();
-                employeeDTO.vegetarian();
-                employeeDTO.name();
-                employeeDTO.user();
-
-
-            }
-        };
+        return new Employee(
+                employeeDTO.gender(),
+        employeeDTO.born(),
+        employeeDTO.vegetarian(),
+        employeeDTO.name(),
+        employeeDTO.user()
+        );
     }
 
     public EmployeeDTO toDTO(Employee employee) {

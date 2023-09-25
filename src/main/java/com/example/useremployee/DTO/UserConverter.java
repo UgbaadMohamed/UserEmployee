@@ -6,13 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConverter {
     public User toEntity(UserDTO userDTO) {
-        return new User() {
-            {
-                userDTO.userID();
-                userDTO.email();
-                userDTO.password();
-            }
-        };
+        return new User(
+        userDTO.userID(),
+        userDTO.email(),
+        userDTO.password());
+
     }
 
 
